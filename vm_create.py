@@ -42,7 +42,7 @@ def define_vm_kvm():
   <vcpu cpuset="%s">%s</vcpu>
   
   <os>
-    <type arch='x86_64'>hvm</type>
+    <type arch='x86_64' machine='pc-i440fx-rhel7.0.0'>hvm</type>
     <boot dev='hd'/>
   </os>
   
