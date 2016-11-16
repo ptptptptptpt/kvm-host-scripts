@@ -42,7 +42,7 @@ def define_vm_kvm():
   <vcpu cpuset="%s">%s</vcpu>
   
   <os>
-    <type arch='x86_64'>hvm</type>
+    <type arch='x86_64' machine='pc-i440fx-rhel7.0.0'>hvm</type>
     <boot dev='hd'/>
   </os>
   
@@ -116,16 +116,6 @@ def define_vm_kvm():
       <driver name='qemu' event_idx='off'/>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x08' function='0x0'/>
     </interface>'''%(MAC1, BR1)
-
-    vmCfgXml += '''
-    <interface type='bridge'>
-      <mac address='%s'/>
-      <source bridge='%s'/>
-      <model type='virtio'/>
-      <driver name='qemu' event_idx='off'/>
-      <address type='pci' domain='0x0000' bus='0x00' slot='0x09' function='0x0'/>
-    </interface>'''%(MAC2, BR2)
-
 
     ###
     vmCfgXml += '''
@@ -273,8 +263,7 @@ if __name__ == '__main__':
     print '\n'.join([MAC0, MAC1, MAC2])
 
     BR0 = 'br-ex'
-    BR1 = 'br_bond_admin'
-    BR2 = 'br_eno1'
+    BR1 = 'br_enp6s0'
 
     # generate uuid
     if uuid:
@@ -284,7 +273,7 @@ if __name__ == '__main__':
     print theUUID
 
     # cpuSet
-    cpuSet = '4-39'
+    cpuSet = '4-31'
 
     ## virt type
     virtType = "para" 

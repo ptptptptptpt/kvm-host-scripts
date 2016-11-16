@@ -5,7 +5,7 @@ programDir=$(readlink -f $programDir)
 
 usage()
 {
-    echo "sh `basename $0`  osDisk  IP_ex  IP_admin  IP_vm"
+    echo "sh `basename $0`  osDisk  IP_ex_admin  IP_vm"
 
 }
 
@@ -29,12 +29,10 @@ set -x
 [ "$1" ] || { usage; exit 1; }
 [ "$2" ] || { usage; exit 1; }
 [ "$3" ] || { usage; exit 1; }
-[ "$4" ] || { usage; exit 1; }
 
 osDisk="$1"
 IP_ex="$2"
-IP_admin="$3"
-IP_vm="$4"
+IP_vm="$3"
 
 
 if ! [ -f ${osDisk} ]; then
@@ -66,24 +64,14 @@ TYPE=Ethernet
 ONBOOT=yes
 BOOTPROTO=static
 IPADDR=${IP_ex}
-PREFIX=26
-GATEWAY=65.255.36.190
+PREFIX=24
+GATEWAY=10.63.51.1
 DNS1=8.8.8.8
 EOF
 
 cat > ${guestmountDir}/etc/sysconfig/network-scripts/ifcfg-eth1 << EOF
 DEVICE=eth1
 NAME=eth1
-TYPE=Ethernet
-ONBOOT=yes
-BOOTPROTO=static
-IPADDR=${IP_admin}
-PREFIX=24
-EOF
-
-cat > ${guestmountDir}/etc/sysconfig/network-scripts/ifcfg-eth2 << EOF
-DEVICE=eth2
-NAME=eth2
 TYPE=Ethernet
 ONBOOT=yes
 BOOTPROTO=static
